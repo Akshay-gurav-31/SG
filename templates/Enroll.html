@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enroll - RD Gurav Music Academy</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: #f0f2f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 40px;
+    }
+    .enroll-container {
+      max-width: 950px;
+      background: #fff;
+      margin: auto;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 35px;
+      color: #0d6efd;
+    }
+    label {
+      font-weight: 600;
+    }
+    .course-info {
+      margin-top: 30px;
+      background: #eef7ff;
+      border-left: 6px solid #0d6efd;
+      border-radius: 12px;
+      padding: 25px;
+      color: #333;
+      font-size: 1.05rem;
+    }
+    .payment-table {
+      margin-top: 20px;
+    }
+    .qr-section {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      background: #f9fcff;
+      border-radius: 12px;
+      border: 1px dashed #b6dfff;
+    }
+    .qr-section img {
+      max-width: 200px;
+      margin: 15px 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .btn-primary {
+      width: 100%;
+      font-size: 1.1rem;
+      padding: 12px;
+      margin-top: 30px;
+      border-radius: 50px;
+    }
+    .form-control, .form-select {
+      border-radius: 8px;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #dc3545;
+      margin-top: -10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="enroll-container">
+    <h1>Enroll Now</h1>
+
+    <form id="enrollForm" action="/submit_enroll" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="studentName" class="form-label">Full Name</label>
+        <input type="text" id="studentName" name="studentName" class="form-control" required placeholder="Enter your full name" />
+      </div>
+
+      <div class="mb-3">
+        <label for="studentEmail" class="form-label">Email Address</label>
+        <input type="email" id="studentEmail" name="studentEmail" class="form-control" required placeholder="Enter your email" />
+      </div>
+
+      <div class="mb-3">
+        <label for="studentMobile" class="form-label">Mobile Number</label>
+        <input type="tel" id="studentMobile" name="studentMobile" class="form-control" required placeholder="Enter your mobile number" pattern="[0-9]{10}" />
+        <div class="note">*Enter 10-digit mobile number</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="studentAddress" class="form-label">Address</label>
+        <textarea id="studentAddress" name="studentAddress" class="form-control" rows="2" required placeholder="Enter your address"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="courseSelect" class="form-label">Select Course</label>
+        <select id="courseSelect" name="course" class="form-select" required>
+          <option value="" selected disabled>-- Choose a course --</option>
+          <option value="piano">Piano</option>
+          <option value="guitar">Guitar</option>
+
+        </select>
+      </div>
+
+      <!-- Course details dynamically shown -->
+      <div id="courseDetails" class="course-info" style="display:none;">
+        <h4 id="courseTitle"></h4>
+        <p id="courseDescription"></p>
+        <h5>Course Fee</h5>
+        <p><strong id="courseFee"></strong></p>
+        <h5>Payment Plan (Monthly)</h5>
+        <table class="table table-bordered payment-table">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Amount (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="paymentPlanBody"></tbody>
+        </table>
+      </div>
+
+      <!-- QR Code Scanner and Screenshot Upload -->
+      <div class="qr-section">
+        <h5 class="text-primary">Scan to Pay</h5>
+        <p class="text-muted">Scan the QR code using any UPI app and upload the payment screenshot below.</p>
+        <img src="/static/images/payment.jpg" alt="QR Code for Payment" />
+        <div class="mb-3 mt-4">
+          <label for="screenshot" class="form-label">Upload Payment Screenshot</label>
+          <input type="file" id="screenshot" name="screenshot" class="form-control" accept="image/*" required />
+        </div>
+        <p class="note">*Upload a clear image of your payment confirmation</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit Enrollment</button>
+    </form>
+  </div>
+
+  <script>
+    const courseData = {
+      piano: {
+        title: "🎹 Piano Course",
+        description: "Learn Classical, Bollywood, and Contemporary piano styles with hands-on training and expert guidance.",
+        fee: "₹6,000 (6 months)",
+        paymentPlan: [
+          { month: "Month 1", amount: "₹1,000" },
+          { month: "Month 2", amount: "₹1,000" },
+          { month: "Month 3", amount: "₹1,000" },
+          { month: "Month 4", amount: "₹1,000" },
+          { month: "Month 5", amount: "₹1,000" },
+          { month: "Month 6", amount: "₹1,000" }
+        ]
+      },
+      guitar: {
+        title: "🎸 Guitar Course",
+        description: "Master Acoustic and Electric guitar techniques including chords, scales, and solos for all skill levels.",
+        fee: "₹7,000 (6 months)",
+        paymentPlan: [
+          { month: "Month 1", amount: "₹1,200" },
+          { month: "Month 2", amount: "₹1,200" },
+          { month: "Month 3", amount: "₹1,200" },
+          { month: "Month 4", amount: "₹1,200" },
+          { month: "Month 5", amount: "₹1,200" },
+          { month: "Month 6", amount: "₹1,000" }
+        ]
+      },
+
+    };
+
+    const courseSelect = document.getElementById("courseSelect");
+    const courseDetails = document.getElementById("courseDetails");
+    const courseTitle = document.getElementById("courseTitle");
+    const courseDescription = document.getElementById("courseDescription");
+    const courseFee = document.getElementById("courseFee");
+    const paymentPlanBody = document.getElementById("paymentPlanBody");
+
+    courseSelect.addEventListener("change", () => {
+      const selected = courseSelect.value;
+      if (!selected) {
+        courseDetails.style.display = "none";
+        return;
+      }
+
+      const data = courseData[selected];
+      courseTitle.textContent = data.title;
+      courseDescription.textContent = data.description;
+      courseFee.textContent = data.fee;
+
+      paymentPlanBody.innerHTML = "";
+      data.paymentPlan.forEach(({ month, amount }) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${month}</td><td>${amount}</td>`;
+        paymentPlanBody.appendChild(row);
+      });
+
+      courseDetails.style.display = "block";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold mb-4">Welcome to your Dashboard!</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Recent Activity Section -->
+            <div class="bg-white shadow-md rounded-md p-4">
+                <h2 class="text-lg font-semibold mb-2">Recent Activity</h2>
+                <ul>
+                    <li class="py-2 border-b border-gray-200">Enrolled in Piano Mastery</li>
+                    <li class="py-2 border-b bordesr-gray-200">Completed Guitar Essentials Module 1</li>
+                    <li class="py-2">Viewed Vocal Training course details</li>
+                </ul>
+            </div>
+
+            <!-- Quick Links Section -->
+            <div class="bg-white shadow-md rounded-md p-4">
+                <h2 class="text-lg font-semibold mb-2">Quick Links</h2>
+                <ul>
+                    <li class="py-2"><a href="/my_courses" class="text-blue-500 hover:text-blue-700">My Courses</a></li>
+                    <li class="py-2"><a href="/profile" class="text-blue-500 hover:text-blue-700">Edit Profile</a></li>
+                    <li class="py-2"><a href="/contact" class="text-blue-500 hover:text-blue-700">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Summary Section -->
+            <div class="bg-white shadow-md rounded-md p-4">
+                <h2 class="text-lg font-semibold mb-2">Summary</h2>
+                <p>You have completed 3 courses.</p>
+                <p>You are currently enrolled in 2 courses.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

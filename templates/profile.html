@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 10px;
+            border: 4px solid #ddd;
+        }
+
+        .edit-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .profile-info {
+            margin-bottom: 15px;
+        }
+
+        .profile-label {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .edit-mode input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .save-button {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img id="profileImage" src="/static/images/classA.jpg" alt="Profile Image" class="profile-image">
+            <input type="file" id="imageUpload" accept="image/*" class="hidden">
+            <label for="imageUpload" class="edit-button">Upload Image</label>
+        </div>
+
+        <button id="editButton" class="edit-button">Edit Profile</button>
+
+        <div id="displayMode">
+            <div class="profile-info">
+                <span class="profile-label">Name:</span>
+                <span id="displayName"></span>
+            </div>
+            <div class="profile-info">
+                <span class="profile-label">Phone:</span>
+                <span id="displayPhone"></span>
+            </div>
+            <div class="profile-info">
+                <span class="profile-label">Email:</span>
+                <span id="displayEmail"></span>
+            </div>
+        </div>
+
+        <div id="editMode" class="hidden edit-mode">
+            <div class="profile-info">
+                <label for="editName" class="profile-label">Name:</label>
+                <input type="text" id="editName">
+            </div>
+            <div class="profile-info">
+                <label for="editPhone" class="profile-label">Phone:</label>
+                <input type="text" id="editPhone">
+            </div>
+            <div class="profile-info">
+                <label for="editEmail" class="profile-label">Email:</label>
+                <input type="email" id="editEmail">
+            </div>
+            <button id="saveButton" class="save-button">Save Profile</button>
+        </div>
+    </div>
+
+    <script>
+        const profileImage = document.getElementById('profileImage');
+        const imageUpload = document.getElementById('imageUpload');
+        const editButton = document.getElementById('editButton');
+        const saveButton = document.getElementById('saveButton');
+        const displayMode = document.getElementById('displayMode');
+        const editMode = document.getElementById('editMode');
+        const displayName = document.getElementById('displayName');
+        const displayPhone = document.getElementById('displayPhone');
+        const displayEmail = document.getElementById('displayEmail');
+        const editName = document.getElementById('editName');
+        const editPhone = document.getElementById('editPhone');
+        const editEmail = document.getElementById('editEmail');
+
+        // Load profile data from local storage
+        let profileData = JSON.parse(localStorage.getItem('profileData')) || {
+            image: '/static/images/classA.jpg',
+            name: 'John Doe',
+            phone: '123-456-7890',
+            email: 'john.doe@example.com'
+        };
+
+        // Function to update display
+        function updateDisplay() {
+            profileImage.src = profileData.image;
+            displayName.textContent = profileData.name;
+            displayPhone.textContent = profileData.phone;
+            displayEmail.textContent = profileData.email;
+        }
+
+        // Initialize the display
+        updateDisplay();
+
+        // Handle image upload (simulated)
+        imageUpload.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileData.image = e.target.result;
+                    updateDisplay();
+                    localStorage.setItem('profileData', JSON.stringify(profileData));
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle edit button click
+        editButton.addEventListener('click', function() {
+            displayMode.classList.add('hidden');
+            editMode.classList.remove('hidden');
+
+            // Populate edit fields with existing data
+            editName.value = profileData.name;
+            editPhone.value = profileData.phone;
+            editEmail.value = profileData.email;
+        });
+
+        // Handle save button click
+        saveButton.addEventListener('click', function() {
+            // Update profile data with edited values
+            profileData.name = editName.value;
+            profileData.phone = editPhone.value;
+            profileData.email = editEmail.value;
+
+            // Update local storage
+            localStorage.setItem('profileData', JSON.stringify(profileData));
+
+            // Update display and switch back to display mode
+            updateDisplay();
+            displayMode.classList.remove('hidden');
+            editMode.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
