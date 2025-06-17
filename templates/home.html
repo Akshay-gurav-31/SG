@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RD Gurav Music Academy</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AOS Animation Library -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+  <style>
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+  --deep-blue: #0a0e27;
+  --vibrant-cyan: #00d4ff;
+  --soft-white: #ffffff;
+  --light-gray: #f8f9fa;
+  --dark-gray: #2c3e50;
+  --shadow-light: rgba(0, 212, 255, 0.2);
+  --shadow-dark: rgba(10, 14, 39, 0.3);
+  --font-primary: 'Poppins', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --border-radius: 20px;
+  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  line-height: 1.7;
+  color: var(--dark-gray);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-gradient);
+  border-radius: 10px;
+}
+
+/* Navbar */
+.navbar {
+  background: rgba(10, 14, 39, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  transition: var(--transition);
+}
+
+.navbar.scrolled {
+  background: rgba(10, 14, 39, 0.98);
+  box-shadow: 0 10px 30px var(--shadow-dark);
+}
+
+.navbar-brand {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.8rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+
+.nav-link {
+  color: var(--soft-white) !important;
+  font-weight: 500;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem !important;
+  border-radius: 25px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--accent-gradient);
+  transition: var(--transition);
+  z-index: -1;
+}
+
+.nav-link:hover::before {
+  left: 0;
+}
+
+.nav-link:hover {
+  color: var(--soft-white) !important;
+  transform: translateY(-2px);
+}
+
+/* Hero Section */
+#hero {
+  height: 100vh;
+  background: linear-gradient(135deg, rgba(10, 14, 39, 0.8), rgba(26, 26, 46, 0.8)),
+              url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1920&q=80') center/cover;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--soft-white);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  margin-bottom: 3rem;
+  font-weight: 400;
+  opacity: 0.9;
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.btn-hero {
+  background: var(--accent-gradient);
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 50px;
+  color: var(--soft-white);
+  text-decoration: none;
+  display: inline-block;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3);
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.btn-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--secondary-gradient);
+  transition: var(--transition);
+  z-index: -1;
+}
+
+.btn-hero:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0, 212, 255, 0.4);
+  color: var(--soft-white);
+}
+
+.btn-hero:hover::before {
+  left: 0;
+}
+
+/* Floating Elements */
+.floating-element {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-element:nth-child(1) {
+  width: 80px;
+  height: 80px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.floating-element:nth-child(2) {
+  width: 120px;
+  height: 120px;
+  top: 60%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+.floating-element:nth-child(3) {
+  width: 60px;
+  height: 60px;
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Section Styling */
+section {
+  padding: 100px 0;
+  position: relative;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 5px;
+  background: var(--accent-gradient);
+  border-radius: 5px;
+}
+
+/* About Section */
+#about {
+  background: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
+}
+
+.about-content {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--dark-gray);
+}
+
+/* Classes Section */
+#classes {
+  background: var(--dark-gradient);
+  color: var(--soft-white);
+}
+
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.class-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius);
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.class-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--accent-gradient);
+  opacity: 0;
+  transition: var(--transition);
+  z-index: -1;
+}
+
+.class-card:hover {
+  transform: translateY(-20px);
+  box-shadow: 0 30px 60px rgba(0, 212, 255, 0.3);
+}
+
+.class-card:hover::before {
+  opacity: 0.1;
+}
+
+.class-icon {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: var(--transition);
+}
+
+.class-card:hover .class-icon {
+  transform: scale(1.2);
+}
+
+.class-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.class-description {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Experience Section */
+#experience {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.stat-card {
+  background: var(--soft-white);
+  border-radius: var(--border-radius);
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.stat-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 80px rgba(0, 212, 255, 0.2);
+}
+
+.stat-number {
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.stat-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+/* Gallery Section */
+#gallery {
+  background: var(--dark-gradient);
+  color: var(--soft-white);
+}
+
+.gallery-carousel {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-carousel img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  transition: var(--transition);
+  
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  top: 50%;
+  transform: translateY(-50%);
+  transition: var(--transition);
+}
+
+.carousel-control-prev {
+  left: 20px;
+}
+
+.carousel-control-next {
+  right: 20px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background: rgba(0, 212, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Videos Section */
+#videos {
+  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.video-container {
+  position: relative;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.video-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 80px rgba(0, 212, 255, 0.2);
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+}
+
+/* Login/Signup Buttons */
+.auth-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-buttons .btn {
+  margin: 0;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-outline-primary {
+  border: 2px solid var(--vibrant-cyan);
+  color: var(--vibrant-cyan);
+  background: transparent;
+}
+
+.btn-outline-primary:hover {
+  background: var(--vibrant-cyan);
+  color: var(--soft-white);
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--accent-gradient);
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+}
+
+/* Footer */
+footer {
+  background: var(--dark-gradient);
+  color: var(--soft-white);
+  padding: 3rem 0;
+  text-align: center;
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent-gradient);
+}
+
+.footer-content p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.social-links a {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--soft-white);
+  font-size: 1.5rem;
+  margin: 0 1rem;
+  transition: var(--transition);
+  border: 2px solid transparent;
+}
+
+.social-links a:hover {
+  background: var(--accent-gradient);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .classes-grid,
+  .stats-grid,
+  .videos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .video-container iframe {
+    height: 250px;
+  }
+  
+  section {
+    padding: 60px 0;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .auth-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .auth-buttons .btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Loading Animation */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--dark-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(0, 212, 255, 0.3);
+  border-top: 4px solid var(--vibrant-cyan);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Smooth scroll offset for fixed navbar */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* Additional animations for elements */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+  </style>
+</head>
+<body>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">RD Gurav Music Academy</a>
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navMenu"
+      style="color: white;"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#classes">Classes</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="#videos">Videos</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+        <li id="user-info" class="nav-item ms-3 auth-buttons"></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Session Check Script -->
+<script>
+  fetch('/check_session')
+    .then(response => response.json())
+    .then(data => {
+      const userInfo = document.getElementById('user-info');
+      if (data.email) {
+        userInfo.innerHTML = `
+          <span class="me-2 text-white">Logged in as: ${data.email}</span>
+          <a href="/logout" class="btn btn-outline-danger btn-sm">Logout</a>
+        `;
+      } else {
+        userInfo.innerHTML = `
+          <a href="/login" class="btn btn-outline-primary btn-sm">Login</a>
+          <a href="/signup" class="btn btn-primary btn-sm">Sign Up</a>
+        `;
+      }
+    });
+</script>
+
+<!-- Hero Section -->
+<section id="hero">
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+  
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">Learn Music, Express Yourself</h1>
+      <p class="hero-subtitle">Join RD Gurav Music Academy & master Piano, Guitar, Ukulele & Vocal with expert guidance</p>
+      <a href="/Enroll" class="btn-hero">
+        <i class="fas fa-music me-2"></i>Enroll Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title animate-on-scroll">About Us</h2>
+    <div class="about-content animate-on-scroll">
+      <p>
+        RD Gurav Music Academy is a premier institute with over 25+ years of experience in music education.
+        We specialize in classical and modern styles, nurturing talent with passion and dedication. Our mission
+        is to inspire and empower students through the transformative power of music, creating confident performers
+        and lifelong music lovers.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Classes Section -->
+<section id="classes">
+  <div class="container">
+    <h2 class="section-title animate-on-scroll">Our Classes</h2>
+    <div class="classes-grid">
+      <div class="class-card animate-on-scroll" onclick="window.location.href='/piano'">
+        <i class="fas fa-piano class-icon"></i>
+        <h3 class="class-title">Piano</h3>
+        <p class="class-description">Classical, Bollywood & Contemporary styles with expert techniques</p>
+      </div>
+      <div class="class-card animate-on-scroll" onclick="window.location.href='/guitar'">
+        <i class="fas fa-guitar class-icon"></i>
+        <h3 class="class-title">Guitar</h3>
+        <p class="class-description">Acoustic & Electric guitar mastery from basics to advanced</p>
+      </div>
+      <div class="class-card animate-on-scroll" onclick="window.location.href='/vocal'">
+        <i class="fas fa-microphone class-icon"></i>
+        <h3 class="class-title">Vocal</h3>
+        <p class="class-description">Hindustani, playback & professional voice training</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience">
+  <div class="container">
+    <h2 class="section-title animate-on-scroll">Our Achievements</h2>
+    <div class="stats-grid">
+      <div class="stat-card animate-on-scroll">
+        <div class="stat-number" data-count="2000">0</div>
+        <div class="stat-label">Students Trained</div>
+      </div>
+      <div class="stat-card animate-on-scroll">
+        <div class="stat-number" data-count="1500">0</div>
+        <div class="stat-label">Shows Organized</div>
+      </div>
+      <div class="stat-card animate-on-scroll">
+        <div class="stat-number" data-count="100">0</div>
+        <div class="stat-label">YouTube Tutorials</div>
+      </div>
+      <div class="stat-card animate-on-scroll">
+        <div class="stat-number" data-count="25">0</div>
+        <div class="stat-label">Years of Expertise</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery">
+  <div class="container">
+    <h2 class="section-title animate-on-scroll">Gallery</h2>
+    <div id="galleryCarousel" class="carousel slide gallery-carousel animate-on-scroll" data-bs-ride="carousel" data-bs-interval="4000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" alt="Music Class 1" loading="lazy">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80" alt="Music Class 2" loading="lazy">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80" alt="Music Class 3" loading="lazy">
+        </div>
+      </div>
+      
+      <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+        <i class="fas fa-chevron-left"></i>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+        <i class="fas fa-chevron-right"></i>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Videos Section -->
+<section id="videos">
+  <div class="container">
+    <h2 class="section-title animate-on-scroll">Our Videos</h2>
+    <div class="videos-grid">
+      <div class="video-container animate-on-scroll">
+        <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" title="YouTube video 1" allowfullscreen></iframe>
+      </div>
+      <div class="video-container animate-on-scroll">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video 2" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <p>© 2025 RD Gurav Music Academy. All rights reserved.</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS Animation JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<script>
+// Initialize AOS
+AOS.init({
+  duration: 800,
+  once: true,
+});
+
+// Loading overlay
+window.addEventListener('load', function() {
+  setTimeout(() => {
+    document.getElementById('loadingOverlay').classList.add('fade-out');
+  }, 1000);
+});
+
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Animate on scroll
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animated');
+      // Trigger counter animation when stat card is visible
+      if (entry.target.classList.contains('stat-card')) {
+        const counter = entry.target.querySelector('.stat-number');
+        if (counter && !counter.classList.contains('counted')) {
+          animateCounter(counter);
+          counter.classList.add('counted');
+        }
+      }
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => {
+  observer.observe(el);
+});
+
+// Counter animation
+function animateCounter(element) {
+  const target = parseInt(element.getAttribute('data-count'));
+  let current = 0;
+  const increment = target / 100; // Adjust for animation speed
+  const duration = 2000; // Animation duration in ms
+  const stepTime = duration / 100;
+
+  function updateCounter() {
+    current += increment;
+    if (current >= target) {
+      element.textContent = target.toLocaleString();
+    } else {
+      element.textContent = Math.ceil(current).toLocaleString();
+      setTimeout(updateCounter, stepTime);
+    }
+  }
+
+  updateCounter();
+}
+</script>
+</body>
+</html>
